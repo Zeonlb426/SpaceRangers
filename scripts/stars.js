@@ -16,9 +16,7 @@ export default class Stars {
     }
 
     update(dt){
-
         this.position.y += this.velocity
-
     }
 
     render(dt, ctx, canvas){
