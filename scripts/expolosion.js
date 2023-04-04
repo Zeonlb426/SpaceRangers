@@ -15,6 +15,14 @@ export default class Explosion {
 
         this.frameWidth = 64
         this.frameHeight = 64
+
+        this.audio = new Audio('../sounds/explosion2.wav');
+        this.playSound()
+    }
+
+    playSound() {
+        this.audio.volume = 0.6
+        this.audio.play()
     }
 
     update(dt){

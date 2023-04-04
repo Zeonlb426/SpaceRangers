@@ -16,6 +16,13 @@ export default class Player {
             y: 10
         }
 
+        this.hitbox = {
+            x: this.position.x + 10,
+            y: this.position.y + 10,
+            w: this.width - 20,
+            h: this.height - 20
+        }
+
         this.image = document.getElementById('player')
 
         this.bullets = []
@@ -30,24 +37,28 @@ export default class Player {
         if (this.game.keys['KeyW'] || this.game.keys['ArrowUp']) {
             if (this.position.y > 100 ) {
                 this.position.y -= this.velocity.y
+                this.hitbox.y -= this.velocity.y
             }
         }
 
         if (this.game.keys['KeyS'] || this.game.keys['ArrowDown']) {
             if (this.position.y + this.height < this.game.canvas.height - 50 ) {
                 this.position.y += this.velocity.y
+                this.hitbox.y += this.velocity.y
             }
         }
 
         if (this.game.keys['KeyA'] || this.game.keys['ArrowLeft']) {
             if (this.position.x > 0 ) {
                 this.position.x -= this.velocity.x
+                this.hitbox.x -= this.velocity.x
             }
         }
 
         if (this.game.keys['KeyD'] || this.game.keys['ArrowRight']) {
             if (this.position.x + this.width < this.game.canvas.width ) {
                 this.position.x += this.velocity.x
+                this.hitbox.x += this.velocity.x
             }
         }
 
@@ -85,6 +96,10 @@ export default class Player {
 
         
         ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, this.position.x, this.position.y, this.width, this.height )
+    
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "red";
+        ctx.strokeRect(this.hitbox.x, this.hitbox.y, this.hitbox.w, this.hitbox.h);
     }
 
 }

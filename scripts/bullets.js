@@ -20,6 +20,14 @@ export default class Bullet {
             w: this.image.width - 20,
             h: this.image.height - 20
         }
+
+        this.audio = new Audio('../sounds/bullet.ogg');
+        this.playSound()
+    }
+
+    playSound() {
+        this.audio.volume = 0.6
+        this.audio.play()
     }
 
     update(dt) {
@@ -29,8 +37,8 @@ export default class Bullet {
 
     render(dt, ctx, canvas) {
         ctx.drawImage(this.image, 0, 0, this.image.width, this.image.height, this.position.x, this.position.y, this.image.width, this.image.height)
-        // ctx.lineWidth = 2;
-        // ctx.strokeStyle = "green";
-        // ctx.strokeRect(this.hitbox.x, this.hitbox.y, this.hitbox.w, this.hitbox.h);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "green";
+        ctx.strokeRect(this.hitbox.x, this.hitbox.y, this.hitbox.w, this.hitbox.h);
     }
 }

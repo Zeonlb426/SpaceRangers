@@ -4,6 +4,7 @@ import Background from "./background.js"
 import Player from "./player.js"
 import Asteroid from "./asteroids.js"
 import Explosion from "./expolosion.js"
+import ExitScene from "./exit.js"
 
 
 export default class GameScene {
@@ -22,6 +23,19 @@ export default class GameScene {
         }
         this.background = new Background(this.game)
         this.player = new Player(this.game)
+        this.music = document.getElementById('sound_bg')
+        this.playSound()
+    }
+
+    playSound() {
+        this.music.volume = 0.3
+        this.music.loop = true
+        this.music.play()
+    }
+
+    stopSound() {
+        this.music.pause()
+        this.music.currentTime = 0
     }
 
     update(dt) {
@@ -62,6 +76,18 @@ export default class GameScene {
                         this.asteroids.splice(index, 1)
                     }
                 })
+
+                if (
+                    asteroid.hitbox.x < this.player.hitbox.x + this.player.hitbox.w &&
+                    asteroid.hitbox.x + asteroid.hitbox.w > this.player.hitbox.x &&
+                    asteroid.hitbox.y < this.player.hitbox.y + this.player.hitbox.h &&
+                    asteroid.hitbox.y + asteroid.hitbox.h > this.player.hitbox.y
+                ) {
+                    this.stopSound()
+                    this.game.setScene(ExitScene);
+                }
+
+
             }  
         })
 
@@ -75,6 +101,7 @@ export default class GameScene {
         })
 
         if (this.game.checkKeyPress('Escape')) {
+            this.stopSound()
             this.game.setScene(MenuScene);
         }
 

@@ -24,7 +24,7 @@ export default class Asteroid {
             h: this.frameHeight - 20
         }
 
-        this.image = document.getElementById('asteroid_1')
+        this.image = document.getElementById('asteroid_3')
     }
 
     update(dt) {
@@ -45,9 +45,9 @@ export default class Asteroid {
     render(dt, ctx, canvas) {
 
         ctx.drawImage(this.image, this.Xindex * this.frameWidth, this.Yindex *  this.frameHeight, this.frameWidth, this.frameHeight, this.position.x, this.position.y, this.frameWidth, this.frameHeight)
-        // ctx.lineWidth = 2;
-        // ctx.strokeStyle = "red";
-        // ctx.strokeRect(this.hitbox.x, this.hitbox.y, this.hitbox.w, this.hitbox.h);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "red";
+        ctx.strokeRect(this.hitbox.x, this.hitbox.y, this.hitbox.w, this.hitbox.h);
     
     }
 }
