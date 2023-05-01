@@ -19,9 +19,6 @@ export default class LevelOne {
         this.globalTimer = 0;
         this.countAsteroids = 0;
         this.intervalAsteroids = 500;
-        // this.stars = [];
-        // this.asteroids = [];
-        // this.explosions = [];
         this.collisionObjects = [];
         this.notCollisionObjects = [];
         this.audio = document.getElementById("music");
@@ -55,17 +52,17 @@ export default class LevelOne {
             this.countAsteroids = 0
         }
 
-        if (this.countAsteroids > this.intervalAsteroids && this.globalTimer > 12000 && this.globalTimer < 20000) {
+        if (this.countAsteroids > this.intervalAsteroids * 0.8 && this.globalTimer > 12000 && this.globalTimer < 20000) {
             this.collisionObjects.push(new AsteroidLevel2(this.game))
             this.countAsteroids = 0
         }
 
-        if (this.countAsteroids > this.intervalAsteroids && this.globalTimer > 22000 && this.globalTimer < 30000) {
+        if (this.countAsteroids > this.intervalAsteroids * 0.7 && this.globalTimer > 22000 && this.globalTimer < 30000) {
             this.collisionObjects.push(new AsteroidLevel3(this.game))
             this.countAsteroids = 0
         }
 
-        if (this.countAsteroids > this.intervalAsteroids && this.globalTimer > 32000 && this.globalTimer < 40000) {
+        if (this.countAsteroids > this.intervalAsteroids * 0.5 && this.globalTimer > 32000 && this.globalTimer < 40000) {
             this.collisionObjects.push(new AsteroidLevel4(this.game))
             this.countAsteroids = 0
         }

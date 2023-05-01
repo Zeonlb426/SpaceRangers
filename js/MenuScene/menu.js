@@ -7,7 +7,7 @@ export default class MenuScene {
     constructor(game) {
         this.game = game;
         this.mute = false;
-        this.opacityDirection = 200;
+        this.opacityDirection = 500;
         this.menuActiveOpacity = 0;
         this.menuIndex = 0;
         this.menuTitle = 'Game Menu';
