@@ -1,18 +1,13 @@
 
-export default class Background {
+export default class Parallax {
     constructor(game) {
-
         this.game = game
-
         this.velocity = {
             y: 1
         }
-
         this.image = document.getElementById("bg" );
-
         this.dy = this.image.height - game.canvas.height
         this.start = this.image.height - game.canvas.height
-
     }
 
     update(dt) {

@@ -1,4 +1,4 @@
-import MenuScene from "./MenuScene/menu.js";
+import MenuScene from "../MenuScene/menu.js";
 
 export default class ExitScene {
     constructor(game) {

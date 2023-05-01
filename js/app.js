@@ -1,6 +1,4 @@
-import Player from "./GameScene/player.js";
 import IntroScene from "./IntroScene/intro.js";
-import GameScene from "./GameScene/game.js";
 
 class App {
     constructor() {
@@ -8,8 +6,8 @@ class App {
         this.ctx = this.canvas.getContext('2d');
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        this.setScene(IntroScene);
         this.initInput();
+        this.setScene(IntroScene);
         this.start();
         this.score = 0
         this.autorText = 'Design by DCH'
@@ -61,16 +59,17 @@ class App {
         let frame = (timestamp) => {
             requestAnimationFrame(frame);
             dt = timestamp - dt
-
             if (delta > interval) {
-                this.update(dt);
+                this.update(delta);
+                this.render(delta);
                 delta = 0;
+            }else{
+                delta += dt
             }
 
-            this.render(dt);
-            delta += dt
             dt = timestamp
         }
+        
         requestAnimationFrame(frame);
     }
 }

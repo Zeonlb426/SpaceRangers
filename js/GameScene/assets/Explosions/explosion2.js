@@ -1,4 +1,4 @@
-import ExitScene from "../../exit.js"
+import ExitScene from "../../../ScoreScene/exit.js"
 
 export default class Explosion2 {
     constructor(game, x, y, scale = 1) {

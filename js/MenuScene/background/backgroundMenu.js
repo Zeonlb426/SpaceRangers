@@ -15,13 +15,16 @@ export default class BackgroundMenu {
             y: this.game.canvas.height / 2
         }
         this.velocity = {
-            x: 1,
+            x: 0.5,
             y: 5
         }
         this.count = 0
         this.image = document.getElementById("bg-menu-ship" );
         this.imageFlame = document.getElementById("flame-menu");
         this.imageBG = document.getElementById("bg-menu");
+        this.imagePlanet = document.getElementById("bg-menu-planet");
+        this.planetX = game.canvas.width,
+        this.planetY = Math.random() * game.canvas.height - 200,
         this.flameFrameWidth = 241
         this.flameFrameHeight = 100
         this.XindexFlame = 0
@@ -43,6 +46,12 @@ export default class BackgroundMenu {
         this.dx -= this.velocity.x
         if (this.dx + this.imageBG.width <= 0 ) {
             this.dx = this.start
+        }
+
+        this.planetX -= this.velocity.x * 2
+        if (this.planetX + this.imagePlanet.width < 0 ) {
+            this.planetX = this.game.canvas.width + Math.random() * 2000
+            this.planetY = Math.random() * (this.game.canvas.height - this.imagePlanet.height / 2) - 200
         }
 
         this.tracks.forEach((track, index) => {
@@ -95,6 +104,19 @@ export default class BackgroundMenu {
     render(dt, ctx, canvas) {
         ctx.drawImage(this.imageBG, 0, 0, this.imageBG.width, this.imageBG.height, this.dx, 0, this.imageBG.width, canvas.height)
         ctx.drawImage(this.imageBG, 0, 0, this.imageBG.width, this.imageBG.height, this.dx + this.imageBG.width, 0, this.imageBG.width, canvas.height)
+        
+        ctx.drawImage(
+            this.imagePlanet,
+            0,
+            0,
+            this.imagePlanet.width,
+            this.imagePlanet.height,
+            this.planetX,
+            this.planetY,
+            this.imagePlanet.width,
+            this.imagePlanet.height,
+        )
+
         ctx.drawImage(
             this.imageFlame,
             0,
@@ -118,10 +140,10 @@ export default class BackgroundMenu {
             this.width,
             this.height
         )
-ctx.globalAlpha = 0.6
+        ctx.globalAlpha = 0.6
         for (var i in this.tracks) {
             this.tracks[i].render(dt, ctx, canvas)
         }
- ctx.globalAlpha = 1
+        ctx.globalAlpha = 1
     }
 }

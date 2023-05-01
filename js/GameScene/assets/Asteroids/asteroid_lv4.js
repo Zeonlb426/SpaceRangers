@@ -11,7 +11,7 @@ export default class AsteroidL4 {
         this.scale = Math.random() * 0.7 + 0.8
         this.position = {
             x: Math.random() * (game.canvas.width - 40) + 10,
-            y: -130
+            y: -90
         }
         this.spriteXIndex = 0
         this.spriteYIndex = 0

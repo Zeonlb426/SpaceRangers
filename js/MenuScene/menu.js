@@ -1,26 +1,27 @@
 import IntroScene from "../IntroScene/intro.js";
 import GameScene from "../GameScene/game.js";
-import ExitScene from "../exit.js";
-import BackgroundMenu from "../GameScene/Background/backgroundMenu.js";
+import ExitScene from "../ScoreScene/exit.js";
+import BackgroundMenu from "./background/backgroundMenu.js";
 
 export default class MenuScene {
     constructor(game) {
         this.game = game;
         this.mute = false;
-        this.opacityDirection = 500;
+        this.opacityDirection = 200;
         this.menuActiveOpacity = 0;
         this.menuIndex = 0;
         this.menuTitle = 'Game Menu';
         this.menuItems = [
             'Start game',
             'Intro scene',
-            'Exit'
+            'Scores'
         ];
         this.background = new BackgroundMenu(this.game)
         this.audio = document.getElementById("menu-music");
+        // this.audio = new Audio('../../sound/menu.mp3');
         this.audioSelect = new Audio('../../sound/select.mp3');
    
-        this.playSound()
+        // this.playSound()
         // GameScene.pauseSound()
     }
     playSound() {
