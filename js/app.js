@@ -10,7 +10,8 @@ class App {
         this.setScene(IntroScene);
         this.start();
         this.score = 0
-        this.autorText = 'Design by DCH'
+        this.authorText = 'Design by DCH'
+        this.fcf = 1000 / 60  // frame carrier frequency
     }
 
     initInput() {
@@ -46,26 +47,26 @@ class App {
     }
 
     render(dt) {
-        // this.ctx.save();
         this.activeScene.render(dt, this.ctx, this.canvas);
-        // this.ctx.restore();
     }
     start() {
         let fps = 60,
-            interval = 1000 / fps,
-            delta = 0,
+            // interval = 1000 / fps,
+            // delta = 0,
             dt = 0;
 
         let frame = (timestamp) => {
             requestAnimationFrame(frame);
             dt = timestamp - dt
-            if (delta > interval) {
-                this.update(delta);
-                this.render(delta);
-                delta = 0;
-            }else{
-                delta += dt
-            }
+            // if (delta > interval) {
+            //     this.update(delta);
+            //     this.render(delta);
+            //     delta = 0;
+            // }else{
+            //     delta += dt
+            // }
+            this.update(dt);
+            this.render(dt);
 
             dt = timestamp
         }

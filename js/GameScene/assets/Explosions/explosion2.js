@@ -1,5 +1,3 @@
-import ExitScene from "../../../ScoreScene/exit.js"
-
 export default class Explosion2 {
     constructor(game, x, y, scale = 1) {
         this.game = game
@@ -32,7 +30,6 @@ export default class Explosion2 {
                 this.Yindex ++
                 if (this.Yindex > 4) {
                     this.delete = true
-                    setTimeout(()=>this.game.setScene(ExitScene), 2000)
                 }
                 this.Xindex = 0
             }

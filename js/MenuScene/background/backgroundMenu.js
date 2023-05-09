@@ -9,16 +9,17 @@ export default class BackgroundMenu {
         this.Xindex = 12
         this.width = 256
         this.height = 256
-        this.move = false
         this.position = {
             x: this.game.canvas.width * 0.2,
             y: this.game.canvas.height / 2
         }
         this.velocity = {
-            x: 0.5,
+            x: 30,
             y: 5
         }
         this.count = 0
+        this.frameTime = 30
+        this.animationTime = 0
         this.image = document.getElementById("bg-menu-ship" );
         this.imageFlame = document.getElementById("flame-menu");
         this.imageBG = document.getElementById("bg-menu");
@@ -30,7 +31,7 @@ export default class BackgroundMenu {
         this.XindexFlame = 0
         this.YindexFlame = 0
         this.tracks = []
-        this.duration = Math.round(Math.random() * 2000) + 500
+        this.duration = Math.round(Math.random() * 6000) + 500
         this.dx = 0
         this.start = 0
         this.Init();
@@ -43,12 +44,13 @@ export default class BackgroundMenu {
     }
 
     update(dt) {
-        this.dx -= this.velocity.x
+
+        this.dx -= dt / this.velocity.x
         if (this.dx + this.imageBG.width <= 0 ) {
             this.dx = this.start
         }
 
-        this.planetX -= this.velocity.x * 2
+        this.planetX -= (dt / this.velocity.x) * 2
         if (this.planetX + this.imagePlanet.width < 0 ) {
             this.planetX = this.game.canvas.width + Math.random() * 2000
             this.planetY = Math.random() * (this.game.canvas.height - this.imagePlanet.height / 2) - 200
@@ -63,42 +65,48 @@ export default class BackgroundMenu {
             track.update(dt);
         })
         
-        if (this.count > this.duration && this.move === false) {
-            this.move = true
-            this.direction = this.direction * -1
-        }
-
-        if (this.move) {
-            this.position.y = this.position.y + this.velocity.y * this.direction
-            this.Xindex += this.direction
+        if (this.count > this.duration) {
+            this.direction = this.direction * -1;
+            this.duration = Math.round(Math.random() * 6000) + 500
+            this.count = 0
+        }else{
+            this.position.y += dt / this.velocity.y * this.direction;
+            
+            if (this.animationTime >= this.frameTime) {
+                this.Xindex += this.direction
+                this.animationTime = 0
+            }
             if (this.Xindex < 0) this.Xindex = 0
             if (this.Xindex > 24) this.Xindex = 24
-
-            if (this.position.y > this.game.canvas.height * 0.7 || this.position.y < this.game.canvas.height * 0.2) {
-                this.move = false
-                this.duration = Math.round(Math.random() * 2000) + 500
-                this.count = 0
+            
+            if (this.position.y > this.game.canvas.height * 0.7) {
+                this.position.y = this.game.canvas.height * 0.7
+                
             }
 
-        }else{
-            this.position.y = this.position.y + (Math.round(Math.random() * 4) - 2)
-            if (this.Xindex !== 12){
-                this.Xindex -= this.direction
+            if (this.position.y < this.game.canvas.height * 0.2) {
+                this.position.y = this.game.canvas.height * 0.2
+                
             }
         }
 
-        if (this.position.y > this.game.canvas.height * 0.7) {
-            this.position.y = this.game.canvas.height * 0.7
-        }
+        // if (this.move) {
+            
+            
+            
 
-        if (this.position.y < this.game.canvas.height * 0.2) {
-            this.position.y = this.game.canvas.height * 0.2
-        }
+
+        // }else{
+        //     if (this.Xindex !== 12){
+        //         this.Xindex -= this.direction
+        //     }
+        // }
 
         this.YindexFlame += 1
         if (this.YindexFlame > 24) this.YindexFlame = 0 
 
-        this.count = this.count + dt
+        this.count += dt
+        this.animationTime += dt
     }
 
     render(dt, ctx, canvas) {

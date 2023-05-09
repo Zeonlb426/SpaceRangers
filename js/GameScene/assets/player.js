@@ -19,13 +19,13 @@ export default class Player {
         }
 
         this.velocity = {
-            x: 15,
-            y: 10
+            x: 17,
+            y: 13
         }
 
         this.bullets = []
         this.intervalShoot = 150
-        this.countTime = 200
+        this.countTime = 1000
 
         this.image = document.getElementById("player");
         this.imageFlame = document.getElementById("flame");
@@ -50,9 +50,9 @@ export default class Player {
     update(dt) {
         if (this.app.keys['KeyW'] ||  this.app.keys['ArrowUp']) {
             if (this.position.y > 50) {
-                this.position.y -= this.velocity.y; // W
-                this.hitbox1.y -= this.velocity.y;
-                this.hitbox2.y -= this.velocity.y;
+                this.position.y -= this.velocity.y / (this.app.fcf / dt); // W
+                this.hitbox1.y -= this.velocity.y / (this.app.fcf / dt);
+                this.hitbox2.y -= this.velocity.y / (this.app.fcf / dt);
             }
             this.YindexFlame = 0
         }else{
@@ -60,9 +60,9 @@ export default class Player {
         }
         if (this.app.keys['KeyS'] ||  this.app.keys['ArrowDown']) {
             if (this.position.y + this.height + 30 < this.app.canvas.height) {
-                this.position.y += this.velocity.y; // S
-                this.hitbox1.y += this.velocity.y;
-                this.hitbox2.y += this.velocity.y;
+                this.position.y += this.velocity.y / (this.app.fcf / dt); // S
+                this.hitbox1.y += this.velocity.y / (this.app.fcf / dt);
+                this.hitbox2.y += this.velocity.y / (this.app.fcf / dt);
             }
             this.YindexFlame = 2
         }else{
@@ -71,9 +71,9 @@ export default class Player {
 
         if (this.app.keys['KeyA'] ||  this.app.keys['ArrowLeft']) {
             if (this.position.x > 0) {
-                this.position.x -= this.velocity.x; // A 
-                this.hitbox1.x -= this.velocity.x;
-                this.hitbox2.x -= this.velocity.x;
+                this.position.x -= this.velocity.x / (this.app.fcf / dt); // A 
+                this.hitbox1.x -= this.velocity.x / (this.app.fcf / dt);
+                this.hitbox2.x -= this.velocity.x / (this.app.fcf / dt);
                 this.Xindex -= 1
                 if (this.Xindex < 0) this.Xindex = 0
             }
@@ -84,9 +84,9 @@ export default class Player {
         }
         if (this.app.keys['KeyD'] ||  this.app.keys['ArrowRight']) {
             if (this.position.x + this.width < this.app.canvas.width) {
-                this.position.x += this.velocity.x; // D
-                this.hitbox1.x += this.velocity.x;
-                this.hitbox2.x += this.velocity.x;
+                this.position.x += this.velocity.x / (this.app.fcf / dt); // D
+                this.hitbox1.x += this.velocity.x / (this.app.fcf / dt);
+                this.hitbox2.x += this.velocity.x / (this.app.fcf / dt);
                 this.Xindex += 1
                 if (this.Xindex > 24) this.Xindex = 24
             }
@@ -96,13 +96,13 @@ export default class Player {
             }
         }
         if (this.app.keys['Space']) {
-            if (this.countTime > this.intervalShoot) {
-                this.bullets.push(new Bullet(this.position.x + this.width / 2, this.position.y))
+            if (this.countTime > this.intervalShoot * (this.app.fcf / dt)) {
+                this.bullets.push(new Bullet(this.position.x + this.width / 2, this.position.y, this.app.fcf))
                 this.countTime = 0
             }
             this.countTime += dt 
         }else{
-            this.countTime = 200
+            this.countTime = 1000
         }
 
         this.bullets.forEach((bullet, index) => {

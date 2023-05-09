@@ -1,9 +1,10 @@
 
 export default class Bullet {
-    constructor(x, y) {
+    constructor(x, y, fcf) {
         this.velocity = {
             y: 25
         }
+        this.fcf = fcf
         this.power = 10
         this.image = document.getElementById("bullet");
         this.position = {
@@ -24,7 +25,7 @@ export default class Bullet {
         this.audio.play();
     }
     update(dt) {
-        this.position.y -= this.velocity.y + dt / this.velocity.y
+        this.position.y -= this.velocity.y / (this.fcf / dt)
         this.hitbox.y = this.position.y + 15
     }
     render(dt, ctx, canvas) {

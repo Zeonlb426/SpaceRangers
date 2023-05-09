@@ -21,7 +21,7 @@ export default class MenuScene {
         // this.audio = new Audio('../../sound/menu.mp3');
         this.audioSelect = new Audio('../../sound/select.mp3');
    
-        // this.playSound()
+        this.playSound()
         // GameScene.pauseSound()
     }
     playSound() {
@@ -99,7 +99,7 @@ export default class MenuScene {
 
         ctx.font = '20px Goldman';
         ctx.fillStyle = '#fff';
-        ctx.fillText(this.game.autorText, canvas.width - 60, canvas.height - 60);
+        ctx.fillText(this.game.authorText, canvas.width - 60, canvas.height - 60);
         ctx.textAlign="left";
 
       // draw menu title

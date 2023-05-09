@@ -8,7 +8,7 @@ export default class AsteroidL4 {
             x: 1 - (Math.random() * 2),
             y: Math.random() * 4 + 4
         }
-        this.scale = Math.random() * 0.7 + 0.8
+        this.scale = Math.random() * 0.5 + 0.8
         this.position = {
             x: Math.random() * (game.canvas.width - 40) + 10,
             y: -90

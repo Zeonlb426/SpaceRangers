@@ -47,7 +47,7 @@ export default class ExitScene {
         ctx.font = '20px Goldman';
         ctx.fillStyle = '#fff';
         ctx.textAlign="right";
-        ctx.fillText(this.game.autorText, canvas.width - 60, canvas.height - 60);
+        ctx.fillText(this.game.authorText, canvas.width - 60, canvas.height - 60);
 
         // display "game over" text
 

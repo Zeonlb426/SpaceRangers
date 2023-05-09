@@ -8,7 +8,7 @@ export default class Track {
             y: y,
         }
         this.velocity = {
-            x: Math.random() * 10 + 10
+            x: Math.random() + 0.5
         }
         this.color = {
             rg: Math.random() * 150 + 100,
@@ -19,7 +19,7 @@ export default class Track {
     }
 
     update(dt) {
-        this.position.x -= this.velocity.x
+        this.position.x -= dt * this.velocity.x
     }
 
     render(dt, ctx, canvas) {
